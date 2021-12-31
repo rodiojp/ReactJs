@@ -5,6 +5,7 @@ import { LargeProductListItem } from './components/products/LargeProductListItem
 import { RegularList } from './components/RegularList';
 import { NumberedList } from './components/NumberedList';
 import { SplitScreen } from './components/SplitScreen';
+import { Modal } from './components/Modal';
 
 const people = [{
     name: 'John Doe',
@@ -51,6 +52,9 @@ const RightHandComponent = ({ message }) => {
 function App() {
     return (
         <>
+            <Modal>
+                <LargeProductListItem product={products[0]} />
+            </Modal>
             <SplitScreen leftWeight={1} rightWeight={3}>
                 <LeftHandComponent name='John' />
                 <RightHandComponent message='Hello World!' />
@@ -72,7 +76,7 @@ function App() {
                 resourceName='product'
                 itemComponent={LargeProductListItem} />
 
-    </>
+        </>
     );
 }
 
