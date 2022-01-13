@@ -7,15 +7,15 @@ import { DataSource } from './components/DataSource';
 import axios from 'axios';
 
 const userIds = ["234", "345",]
+const getServerData = url => async () => {
+    const response = await axios.get(url);
+    return response.data;
+}
 function App() {
     return (
         <>
-            <h1>DataSource - getDataFunc(axios.get("user/345")) - UserInfo</h1>
-            <DataSource getDataFunc={async () => {
-                const response = await axios.get("user/345");
-                return response.data;
-            }
-            } resourceName="user">
+            <h1>DataSource - getDataFunc(getServerData(axios.get("user/345"))) - UserInfo</h1>
+            <DataSource getDataFunc={getServerData("user/345")} resourceName="user">
                 <UserInfo />
             </DataSource>
             <h1>ResourceLoader - ProductInfo "product/2345"</h1>
