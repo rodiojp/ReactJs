@@ -6,34 +6,44 @@ import { ProductInfo } from './components/products/ProductInfo';
 import { DataSource } from './components/DataSource';
 import axios from 'axios';
 
-const userIds = ["234", "345",]
+const userIds = ["234", "345",];
 const getServerData = url => async () => {
     const response = await axios.get(url);
     return response.data;
-}
+};
+const Text = ({ message }) => <h1>{message}</h1>;
+const getLocalStorageData = key => () => {
+    return localStorage.getItem(key) || ""
+};
+console.log(getLocalStorageData("message")());
+
 function App() {
     return (
         <>
-            <h1>DataSource - getDataFunc(getServerData(axios.get("user/345"))) - UserInfo</h1>
+            <Text message={getLocalStorageData("message")()}></Text>
+            <DataSource getDataFunc={getLocalStorageData("message")} resourceName="message">
+                <Text />
+            </DataSource>
+            <Text message='DataSource - getDataFunc(getServerData(axios.get("user/345"))) - UserInfo'></Text>
             <DataSource getDataFunc={getServerData("user/345")} resourceName="user">
                 <UserInfo />
             </DataSource>
-            <h1>ResourceLoader - ProductInfo "product/2345"</h1>
+            <Text message='ResourceLoader - ProductInfo "product/2345"'></Text>
             <ResourceLoader resourceUrl="product/2345" resourceName="product">
                 <ProductInfo />
             </ResourceLoader>
 
-            <h1>ResourceLoader - UserInfo "user/234"</h1>
+            <Text message='ResourceLoader - UserInfo "user/234"'></Text>
             <ResourceLoader resourceUrl="user/234" resourceName="user">
                 <UserInfo />
             </ResourceLoader>
 
-            <h1>CurrentUserLoader - UserInfo "currentUser"</h1>
+            <Text message='CurrentUserLoader - UserInfo "currentUser"'></Text>
             <CurrentUserLoader>
                 <UserInfo />
             </CurrentUserLoader>
 
-            <h1>userIds.map(UserLoader - UserInfo "user/["234", "345",]")</h1>
+            <Text message='userIds.map(UserLoader - UserInfo "user/["234", "345",]")'></Text>
             {
                 userIds.map(
                     (id) =>
