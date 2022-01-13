@@ -3,11 +3,21 @@ import { UserLoader } from './components/users/UserLoader';
 import { UserInfo } from './components/users/UserInfo';
 import { ResourceLoader } from './components/ResourceLoader';
 import { ProductInfo } from './components/products/ProductInfo';
+import { DataSource } from './components/DataSource';
+import axios from 'axios';
 
 const userIds = ["234", "345",]
 function App() {
     return (
         <>
+            <h1>DataSource - getDataFunc(axios.get("user/345")) - UserInfo</h1>
+            <DataSource getDataFunc={async () => {
+                const response = await axios.get("user/345");
+                return response.data;
+            }
+            } resourceName="user">
+                <UserInfo />
+            </DataSource>
             <h1>ResourceLoader - ProductInfo "product/2345"</h1>
             <ResourceLoader resourceUrl="product/2345" resourceName="product">
                 <ProductInfo />
