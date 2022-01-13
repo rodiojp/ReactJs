@@ -73,3 +73,14 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ### 
 https://axios-http.com/ 
 npm install axios
+
+### start server.js with app.js
+```json
+  "scripts": {
+    "init-app": "react-scripts start",
+    "init-server": "node server/server.js",
+    "start": "start npm run init-server && start npm run init-app",
+  },
+```
+
+run the app: npm start
